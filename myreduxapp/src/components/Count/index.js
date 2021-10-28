@@ -1,28 +1,29 @@
 import React, { Component } from 'react'
 import store from "../../redux/store"
+import {createIncrementAction, createDecrementAction} from "../../redux/count_action"
 
 export default class Count extends Component {
   state = { car : "rx5" }
   increment = () => {
     const {value} = this.selecNumber;
-     store.dispatch({type:"increment", data:value*1})
+     store.dispatch(createIncrementAction(value*1))
   }
   decrement = () => {
     const {value} = this.selecNumber;
     //const {count} = this.state;
     // 通知redux加value
-    store.dispatch({type:"decrement", data:value*1})
+    store.dispatch(createDecrementAction(value*1))
   }
   incrementIfOdd = () => {
     const {value} = this.selecNumber;
     const count = store.getState()
     if(count % 2 === 0) return
-    store.dispatch({type:"increment", data:value*1})
+    store.dispatch(createIncrementAction(value*1))
   }
   incrementAsync = () => {
     const {value} = this.selecNumber;
     setTimeout(()=>{
-      store.dispatch({type:"increment", data:value*1})
+      store.dispatch(createIncrementAction(value*1))
     },1000)
   }
   render() {
